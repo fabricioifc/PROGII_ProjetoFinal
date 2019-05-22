@@ -7,6 +7,27 @@ import java.sql.SQLException;
 
 public class DatabaseUtil {
 
+  private static void criarTabelas() throws SQLException {
+    try {
+      Connection conn = DatabaseConnection.getInstance().getConnection();
+      String sql = ArquivoUtil.getDump();
+      PreparedStatement ps = conn.prepareStatement(sql);
+      ps.execute();
+
+      DatabaseConnection.commit();
+    } catch (SQLException ex) {
+      DatabaseConnection.rollback();
+      throw ex;
+    } finally {
+      DatabaseConnection.fecharConexao();
+    }
+  }
+
+  public static void main(String[] args) throws Exception {
+    criarTabelas();
+    System.out.println("DUMP CARREGADO na base " + DatabaseConnection.DATABASE_NOME + "!");
+  }
+
 //    private static boolean verificarDatabaseExiste() throws SQLException {
 //        Connection conn = DatabaseConnection.getInstance().getConnection();
 //        String sql = "SELECT 1 from pg_database WHERE datname=?";
@@ -25,24 +46,4 @@ public class DatabaseUtil {
 //        PreparedStatement ps = conn.prepareStatement(sql);
 //        ps.executeUpdate();
 //    }
-    private static void criarTabelas() throws SQLException {
-        try {
-            Connection conn = DatabaseConnection.getInstance().getConnection();
-            String sql = ArquivoUtil.getDump();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.execute();
-            
-            DatabaseConnection.commit();
-        } catch (SQLException ex) {
-            DatabaseConnection.rollback();
-            throw ex;
-        } finally {
-            DatabaseConnection.fecharConexao();
-        }
-    }
-
-    public static void main(String[] args) throws Exception {
-        criarTabelas();
-        System.out.println("DUMP CARREGADO na base " + DatabaseConnection.DATABASE_NOME + "!");
-    }
 }
