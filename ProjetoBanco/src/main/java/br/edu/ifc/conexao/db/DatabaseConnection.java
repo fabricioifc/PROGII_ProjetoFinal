@@ -39,19 +39,19 @@ public class DatabaseConnection {
   }
 
   public static void fecharConexao() throws SQLException {
-    if (instance.getConnection() != null) {
+    if (instance != null && instance.getConnection() != null) {
       instance.getConnection().close();
     }
   }
 
   public static void commit() throws SQLException {
-    if (instance.getConnection() != null) {
+    if (instance != null && instance.getConnection() != null) {
       instance.getConnection().commit();
     }
   }
 
   public static void rollback() throws SQLException {
-    if (instance.getConnection() != null) {
+    if (instance != null && instance.getConnection() != null) {
       instance.getConnection().rollback();
     }
   }
