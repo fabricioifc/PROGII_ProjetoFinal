@@ -27,7 +27,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="mnMusicas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastros"/>
           </Properties>
@@ -35,11 +35,6 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnProdutos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Produtos"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cliente"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -118,13 +113,16 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnRelatorios">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Oi"/>
+            <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatoriosActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

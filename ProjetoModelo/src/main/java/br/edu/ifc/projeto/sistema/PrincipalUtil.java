@@ -1,32 +1,49 @@
 package br.edu.ifc.projeto.sistema;
 
+import br.edu.ifc.projeto.sistema.relatorios.RelatorioUtil;
+
 public class PrincipalUtil {
 
-  private static PrincipalUtil utilitario;
-  private TelaPrincipal principal;
+    private static PrincipalUtil utilitario;
+    private TelaPrincipal principal;
 
-  public PrincipalUtil() {
-  }
+    private RelatorioUtil relUtil;
 
-  public static PrincipalUtil getInstance() {
-    if (utilitario == null) {
-      utilitario = new PrincipalUtil();
+    public PrincipalUtil() {
     }
 
-    return utilitario;
-  }
+    public static PrincipalUtil getInstance() {
+        if (utilitario == null) {
+            utilitario = new PrincipalUtil();
+        }
 
-  public void iniciarSistema() {
-    if (this.principal == null) {
-      this.principal = new TelaPrincipal();
+        return utilitario;
     }
-    this.principal.setVisible(true);
-    this.principal.setEnabled(true);
 
-  }
+    public void iniciarSistema() {
+        try {
+            if (this.principal == null) {
+                this.principal = new TelaPrincipal();
+            }
+            //Iniciar a fila ao iniciar o sistema
+            if (relUtil == null) {
+                relUtil = new RelatorioUtil();
+                relUtil.iniciarFilaRelatorios();
+            }
 
-  public TelaPrincipal getPrincipal() {
-    return principal;
-  }
+            this.principal.setVisible(true);
+            this.principal.setEnabled(true);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public TelaPrincipal getPrincipal() {
+        return principal;
+    }
+
+    public RelatorioUtil getRelUtil() {
+        return relUtil;
+    }
 
 }
