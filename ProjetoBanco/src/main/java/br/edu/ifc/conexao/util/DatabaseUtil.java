@@ -9,9 +9,8 @@ public class DatabaseUtil {
 
   private static void criarTabelas() throws SQLException {
     try {
-      Connection conn = DatabaseConnection.getInstance().getConnection();
       String sql = ArquivoUtil.getDump();
-      PreparedStatement ps = conn.prepareStatement(sql);
+      PreparedStatement ps = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
       ps.execute();
 
       DatabaseConnection.commit();
