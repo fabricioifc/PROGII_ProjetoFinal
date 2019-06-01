@@ -15,31 +15,35 @@ public class GeraRelatorios {
 
         try {
 //            RelatorioUtil relUtil = new RelatorioUtil();
-//            relUtil.criarRelatorio("src/main/resources/relatorios/produtos.jrxml", "Produtos");
-//            System.out.println(relUtil.getTamanhoFila());
-//            relUtil.criarRelatorio("src/main/resources/relatorios/produtos.jrxml", "Produtos");
-//            relUtil.criarRelatorio("src/main/resources/relatorios/produtos.jrxml", "Produtos");
-//            System.out.println(relUtil.getTamanhoFila());
+//            
+//            RelatorioModel relatorio1 = new RelatorioModel("src/main/resources/relatorios/produtos.jrxml", "Produtos");
+//            RelatorioModel relatorio2 = new RelatorioModel("src/main/resources/relatorios/produtos.jrxml", "Produtos");
+//            RelatorioModel relatorio3 = new RelatorioModel("src/main/resources/relatorios/produtos.jrxml", "Produtos");
+//            
+//            relUtil.criarRelatorio(relatorio1);
+//            relUtil.criarRelatorio(relatorio2);
+//            relUtil.criarRelatorio(relatorio3);
+//            
 //            relUtil.iniciarFilaRelatorios();
 
-//            Runnable r = new Runnable() {
-//                @Override
-//                public void run() {
-//                    boolean flag = true;
-//                    int i = 0;
-//                    while (flag) {
-//                        try {
-//                            i++;
-//                            System.out.println("Contador -> " + i);
-//                            Thread.sleep(2000);
-//                        } catch (InterruptedException ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    }
-//                }
-//            };
-//            Thread bg = new Thread(r);
-//            bg.start();
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    boolean flag = true;
+                    int i = 0;
+                    while (flag) {
+                        try {
+                            i++;
+                            System.out.println("Contador -> " + i);
+                            Thread.sleep(2000);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+            };
+            Thread bg = new Thread(r);
+            bg.start();
             System.out.println("Terminou");
         } catch (Exception ex) {
             ex.printStackTrace();
