@@ -4,13 +4,12 @@ import br.edu.ifc.conexao.model.Produto;
 import br.edu.ifc.projeto.sistema.util.ProdutoTabela;
 import br.edu.ifc.projeto.sistema.PrincipalUtil;
 import br.edu.ifc.projeto.sistema.controller.ProdutoController;
+import br.edu.ifc.projeto.sistema.relatorios.RelatorioModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ProdutoGUI extends javax.swing.JInternalFrame {
@@ -51,6 +50,33 @@ public class ProdutoGUI extends javax.swing.JInternalFrame {
                 }
             }
         });
+        btnGerarRelatorio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    RelatorioModel relatorio = new RelatorioModel("src/main/resources/relatorios/produtos.jrxml", "Produtos");
+                    PrincipalUtil.getInstance().getRelUtil().criarRelatorio(relatorio);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    mostrarMensagem(ex.getMessage());
+                }
+
+            }
+        });
+        btnGerarRelatorioParametro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    RelatorioModel relatorio = new RelatorioModel("src/main/resources/relatorios/produtos_valor.jrxml", "Produtos Valor");
+                    relatorio.getParametros().put("parametro_valor", 1.00);
+                    PrincipalUtil.getInstance().getRelUtil().criarRelatorio(relatorio);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    mostrarMensagem(ex.getMessage());
+                }
+
+            }
+        });
     }
 
     public void mostrarMensagem(String mensagem) {
@@ -77,6 +103,8 @@ public class ProdutoGUI extends javax.swing.JInternalFrame {
         txtValor = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
         btnSalvar = new javax.swing.JButton();
+        btnGerarRelatorio = new javax.swing.JButton();
+        btnGerarRelatorioParametro = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
@@ -122,6 +150,23 @@ public class ProdutoGUI extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnSalvar);
+
+        btnGerarRelatorio.setText("Gerar Relatório");
+        btnGerarRelatorio.setFocusable(false);
+        btnGerarRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGerarRelatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnGerarRelatorio);
+
+        btnGerarRelatorioParametro.setText("Gerar Relatório (acima de 1 real)");
+        btnGerarRelatorioParametro.setFocusable(false);
+        btnGerarRelatorioParametro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGerarRelatorioParametro.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGerarRelatorioParametro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarRelatorioParametroActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnGerarRelatorioParametro);
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,8 +229,14 @@ public class ProdutoGUI extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tabelaMouseClicked
 
+    private void btnGerarRelatorioParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioParametroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGerarRelatorioParametroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGerarRelatorio;
+    private javax.swing.JButton btnGerarRelatorioParametro;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

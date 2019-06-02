@@ -1,8 +1,10 @@
 package br.edu.ifc.projeto.sistema;
 
+import br.edu.ifc.projeto.sistema.relatorios.RelatoriosGUI;
 import br.edu.ifc.projeto.sistema.view.ProdutoGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -10,171 +12,188 @@ import javax.swing.JTextPane;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
-  public TelaPrincipal() {
-    initComponents();
-    super.setTitle("Principal");
-    super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    // Tela inteira
-    super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    public TelaPrincipal() {
+        initComponents();
+        super.setTitle("Principal");
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Tela inteira
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-    postConstruct();
-  }
+        postConstruct();
+    }
 
-  private void postConstruct() {
-    ActionListener sairListener = new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        int resposta = JOptionPane.showOptionDialog(
-            TelaPrincipal.this,
-            "Deseja Sair?",
-            "Tem Certeza?",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            new String[]{"Sim", "Cancelar"},
-            "Sim");
-        if (resposta == 0) {
-          System.exit(0);
+    private void postConstruct() {
+        ActionListener sairListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int resposta = JOptionPane.showOptionDialog(
+                        TelaPrincipal.this,
+                        "Deseja Sair?",
+                        "Tem Certeza?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new String[]{"Sim", "Cancelar"},
+                        "Sim");
+                if (resposta == 0) {
+                    System.exit(0);
+                }
+            }
+        };
+        mnSair.addActionListener(sairListener);
+        btnSair.addActionListener(sairListener);
+
+        mnProdutos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ProdutoGUI tela = new ProdutoGUI();
+                criarTela(tela);
+            }
+        });
+        
+        btnRelatorios.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                criarTela(new RelatoriosGUI());
+            }
+        });
+
+    }
+
+    private void criarTela(JInternalFrame tela) {
+        boolean telaExistente = false;
+        for (JInternalFrame frameNaTela : desktop.getAllFrames()) {
+            if (tela.getName().equals(frameNaTela.getName())) {
+                telaExistente = true;
+                break;
+            }
         }
-      }
-    };
-    mnSair.addActionListener(sairListener);
-    btnSair.addActionListener(sairListener);
 
-    mnProdutos.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        ProdutoGUI tela = new ProdutoGUI();
-        criarTela(tela);
-      }
-    });
-  }
+        if (!telaExistente) {
+            try {
+                tela.setVisible(true);
+                tela.setSelected(true);
+                desktop.add(tela);
+            } catch (PropertyVetoException ex) {
+                ex.printStackTrace();
+            }
+        }
 
-  private void criarTela(JInternalFrame tela) {
-    boolean telaExistente = false;
-    for (JInternalFrame frameNaTela : desktop.getAllFrames()) {
-      if (tela.getName().equals(frameNaTela.getName())) {
-        telaExistente = true;
-        break;
-      }
     }
 
-    if (!telaExistente) {
-      tela.setVisible(true);
-      desktop.add(tela);
+    public JTextPane getMensagens() {
+        return mensagens;
     }
 
-  }
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-  public JTextPane getMensagens() {
-    return mensagens;
-  }
+        jMenu3 = new javax.swing.JMenu();
+        jFileChooser1 = new javax.swing.JFileChooser();
+        desktop = new javax.swing.JDesktopPane();
+        jToolBar1 = new javax.swing.JToolBar();
+        btnSair = new javax.swing.JButton();
+        btnRelatorios = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        mensagens = new javax.swing.JTextPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnSair = new javax.swing.JMenuItem();
+        mnMusicas = new javax.swing.JMenu();
+        mnProdutos = new javax.swing.JMenuItem();
 
-  @SuppressWarnings("unchecked")
-  // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-  private void initComponents() {
+        jMenu3.setText("jMenu3");
 
-    jMenu3 = new javax.swing.JMenu();
-    jFileChooser1 = new javax.swing.JFileChooser();
-    desktop = new javax.swing.JDesktopPane();
-    jToolBar1 = new javax.swing.JToolBar();
-    btnSair = new javax.swing.JButton();
-    jButton1 = new javax.swing.JButton();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    mensagens = new javax.swing.JTextPane();
-    jMenuBar1 = new javax.swing.JMenuBar();
-    jMenu1 = new javax.swing.JMenu();
-    mnSair = new javax.swing.JMenuItem();
-    jMenu2 = new javax.swing.JMenu();
-    mnProdutos = new javax.swing.JMenuItem();
-    jMenuItem1 = new javax.swing.JMenuItem();
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jMenu3.setText("jMenu3");
+        javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
+        desktop.setLayout(desktopLayout);
+        desktopLayout.setHorizontalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        desktopLayout.setVerticalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 218, Short.MAX_VALUE)
+        );
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jToolBar1.setRollover(true);
 
-    javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
-    desktop.setLayout(desktopLayout);
-    desktopLayout.setHorizontalGroup(
-      desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
-    );
-    desktopLayout.setVerticalGroup(
-      desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 218, Short.MAX_VALUE)
-    );
+        btnSair.setText("Sair");
+        btnSair.setFocusable(false);
+        btnSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnSair);
 
-    jToolBar1.setRollover(true);
+        btnRelatorios.setText("Relatórios");
+        btnRelatorios.setFocusable(false);
+        btnRelatorios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatoriosActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRelatorios);
 
-    btnSair.setText("Sair");
-    btnSair.setFocusable(false);
-    btnSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    btnSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-    jToolBar1.add(btnSair);
+        jScrollPane1.setViewportView(mensagens);
 
-    jButton1.setText("Oi");
-    jButton1.setFocusable(false);
-    jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-    jToolBar1.add(jButton1);
+        jMenu1.setText("Arquivo");
 
-    jScrollPane1.setViewportView(mensagens);
+        mnSair.setText("Sair");
+        jMenu1.add(mnSair);
 
-    jMenu1.setText("Arquivo");
+        jMenuBar1.add(jMenu1);
 
-    mnSair.setText("Sair");
-    jMenu1.add(mnSair);
+        mnMusicas.setText("Cadastros");
 
-    jMenuBar1.add(jMenu1);
+        mnProdutos.setText("Produtos");
+        mnMusicas.add(mnProdutos);
 
-    jMenu2.setText("Cadastros");
+        jMenuBar1.add(mnMusicas);
 
-    mnProdutos.setText("Produtos");
-    jMenu2.add(mnProdutos);
+        setJMenuBar(jMenuBar1);
 
-    jMenuItem1.setText("Cliente");
-    jMenu2.add(jMenuItem1);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(desktop)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(desktop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-    jMenuBar1.add(jMenu2);
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
-    setJMenuBar(jMenuBar1);
-
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(desktop)
-      .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      .addComponent(jScrollPane1)
-    );
-    layout.setVerticalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(desktop)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
-
-    pack();
-  }// </editor-fold>//GEN-END:initComponents
+    private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRelatoriosActionPerformed
 
 
-  // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnSair;
-  private javax.swing.JDesktopPane desktop;
-  private javax.swing.JButton jButton1;
-  private javax.swing.JFileChooser jFileChooser1;
-  private javax.swing.JMenu jMenu1;
-  private javax.swing.JMenu jMenu2;
-  private javax.swing.JMenu jMenu3;
-  private javax.swing.JMenuBar jMenuBar1;
-  private javax.swing.JMenuItem jMenuItem1;
-  private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JToolBar jToolBar1;
-  private javax.swing.JTextPane mensagens;
-  private javax.swing.JMenuItem mnProdutos;
-  private javax.swing.JMenuItem mnSair;
-  // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRelatorios;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JDesktopPane desktop;
+    private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTextPane mensagens;
+    private javax.swing.JMenu mnMusicas;
+    private javax.swing.JMenuItem mnProdutos;
+    private javax.swing.JMenuItem mnSair;
+    // End of variables declaration//GEN-END:variables
 }
