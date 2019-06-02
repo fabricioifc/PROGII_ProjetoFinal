@@ -5,6 +5,7 @@ public class Produto {
   private Long id;
   private String nome;
   private Double valor;
+  private Categoria categoria;
 
   public Produto() {
   }
@@ -13,6 +14,14 @@ public class Produto {
     this.id = id;
     this.nome = nome;
     this.valor = valor;
+  }
+
+  public Categoria getCategoria() {
+    return categoria;
+  }
+
+  public void setCategoria(Categoria categoria) {
+    this.categoria = categoria;
   }
 
   public Long getId() {

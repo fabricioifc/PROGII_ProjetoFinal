@@ -12,7 +12,7 @@ public class DatabaseConnection {
   private final String url = "jdbc:postgresql://localhost:5432/";
   public static final String DATABASE_NOME = "produtosdb";
   private static final String USUARIO = "postgres";
-  private static final String SENHA = "postgres";
+  private static final String SENHA = "ifc";
 
   private DatabaseConnection() throws SQLException {
     try {

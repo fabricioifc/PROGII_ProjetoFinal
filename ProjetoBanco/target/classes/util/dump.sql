@@ -10,3 +10,17 @@ create table clientes (
     cpf bigint,
     dtnascimento date
 );
+
+CREATE TABLE categorias (
+	id bigserial not null primary key,
+	nome varchar(45) not null,
+	ativo boolean default true
+);
+ALTER TABLE produtos
+ADD column categoria_id bigint 
+
+
+ALTER TABLE produtos
+ADD FOREIGN KEY (categoria_id)
+REFERENCES categorias(id);
+
