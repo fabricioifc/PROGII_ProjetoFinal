@@ -1,5 +1,6 @@
 package br.edu.ifc.projeto.sistema.controller;
 
+import br.edu.ifc.conexao.dao.CategoriaDAO;
 import br.edu.ifc.conexao.dao.ProdutoDAO;
 import br.edu.ifc.conexao.model.Produto;
 import br.edu.ifc.projeto.sistema.view.ProdutoGUI;
@@ -16,12 +17,12 @@ public class ProdutoController implements ProdutoListener {
   private List<Produto> lista = new ArrayList<>();
   private ProdutoGUI tela;
   private ProdutoDAO dao;
+  private CategoriaDAO categoriaDAO;
 
   public ProdutoController(JInternalFrame tela) {
     this.tela = (ProdutoGUI) tela;
     dao = new ProdutoDAO();
-
-//        lista.add(new Produto(1L, "Macarrão", 5.50));
+    categoriaDAO = new CategoriaDAO();
   }
 
   @Override
@@ -30,19 +31,8 @@ public class ProdutoController implements ProdutoListener {
     // Se for produto novo
     if (produto.getId() == null) {
       produto.setId(Long.parseLong(String.valueOf(lista.size() + 1)));
-//            salvou = lista.add(produto);
       salvou = dao.salvar(produto);
     } else {
-      // senão, se for uma alteração
-      //Remove da lista
-//            lista.removeIf(new Predicate<Produto>() {
-//                @Override
-//                public boolean test(Produto t) {
-//                    return t.getId().equals(produto.getId());
-//                }
-//            });
-      // Adiciona na lista
-//            salvou = lista.add(produto);
       salvou = dao.atualizar(produto, produto.getId());
     }
     if (salvou) {
@@ -58,8 +48,8 @@ public class ProdutoController implements ProdutoListener {
   public void carregar() {
     try {
       //Consulta
-//            tela.montarTabela(lista);
       tela.montarTabela(dao.listarTodos());
+      tela.montarComboCategorias(categoriaDAO.listarTodos());
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -39,4 +39,9 @@ public class Categoria {
     this.ativo = ativo;
   }
 
+  @Override
+  public String toString() {
+    return this.id + " - " + this.nome;
+  }
+
 }

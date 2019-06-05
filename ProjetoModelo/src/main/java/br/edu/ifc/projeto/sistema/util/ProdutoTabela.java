@@ -1,5 +1,6 @@
 package br.edu.ifc.projeto.sistema.util;
 
+import br.edu.ifc.conexao.model.Categoria;
 import br.edu.ifc.conexao.model.Produto;
 import java.util.List;
 import javax.swing.JTable;
@@ -9,13 +10,14 @@ import javax.swing.table.TableColumnModel;
 
 public class ProdutoTabela extends AbstractTableModel {
 
-  private String colunas[] = {"#", "Nome", "Valor", "objeto"};
+  private String colunas[] = {"#", "Nome", "Valor", "Categoria", "objeto"};
   private List<?> lista;
 
   private final int COLUNA_ID = 0;
   private final int COLUNA_NOME = 1;
   private final int COLUNA_VALOR = 2;
-  private final int COLUNA_OBJETO = 3;
+  private final int COLUNA_CATEGORIA = 3;
+  private final int COLUNA_OBJETO = 4;
 
   public ProdutoTabela(List<?> lista) {
     this.lista = lista;
@@ -43,6 +45,8 @@ public class ProdutoTabela extends AbstractTableModel {
         return Long.class;
       case COLUNA_NOME:
         return String.class;
+      case COLUNA_CATEGORIA:
+        return Categoria.class;
       case COLUNA_VALOR:
         return Double.class;
       default:
@@ -52,17 +56,19 @@ public class ProdutoTabela extends AbstractTableModel {
 
   @Override
   public Object getValueAt(int linha, int coluna) {
-    Produto aluno = (Produto) this.lista.get(linha);
+    Produto produto = (Produto) this.lista.get(linha);
 
     switch (coluna) {
       case COLUNA_ID:
-        return aluno.getId();
+        return produto.getId();
       case COLUNA_NOME:
-        return aluno.getNome();
+        return produto.getNome();
       case COLUNA_VALOR:
-        return aluno.getValor();
+        return produto.getValor();
+      case COLUNA_CATEGORIA:
+        return produto.getCategoria();
       case COLUNA_OBJETO:
-        return aluno;
+        return produto;
     }
     return null;
   }
@@ -80,6 +86,9 @@ public class ProdutoTabela extends AbstractTableModel {
         break;
       case COLUNA_VALOR:
         aluno.setValor(Double.parseDouble(valor.toString()));
+        break;
+      case COLUNA_CATEGORIA:
+        aluno.setCategoria((Categoria) valor);
         break;
       case COLUNA_OBJETO:
         aluno = (Produto) valor;

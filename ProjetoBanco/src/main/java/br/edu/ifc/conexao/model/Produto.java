@@ -10,10 +10,11 @@ public class Produto {
   public Produto() {
   }
 
-  public Produto(Long id, String nome, Double valor) {
+  public Produto(Long id, String nome, Double valor, Categoria categoria) {
     this.id = id;
     this.nome = nome;
     this.valor = valor;
+    this.categoria = categoria;
   }
 
   public Categoria getCategoria() {
