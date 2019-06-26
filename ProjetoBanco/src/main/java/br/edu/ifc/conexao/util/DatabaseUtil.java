@@ -22,10 +22,10 @@ public class DatabaseUtil {
     }
   }
 
-  public static void main(String[] args) throws Exception {
-    criarTabelas();
-    System.out.println("DUMP CARREGADO na base " + DatabaseConnection.DATABASE_NOME + "!");
-  }
+//  public static void main(String[] args) throws Exception {
+//    criarTabelas();
+//    System.out.println("DUMP CARREGADO na base " + DatabaseConnection.DATABASE_NOME + "!");
+//  }
 
 //    private static boolean verificarDatabaseExiste() throws SQLException {
 //        Connection conn = DatabaseConnection.getInstance().getConnection();

@@ -14,22 +14,11 @@ public class UsuarioDAO implements GenericDAO<Usuarios, Long> {
   private final String SQL_DELETE = "DELETE FROM usuarios where id = ?";
   private final String SQL_SELECT = "SELECT * FROM usuarios";
   private final String SQL_SELECT_BY_ID = "SELECT * FROM usuarios where id = ?";
-  private final String SQL_VALIDAR_USUARIO = "SELECT * FROM usuarios where usuario = ? and senha = ?";
+  private final String SQL_VALIDAR_USUARIO = 'CRIAR O COMANDO SQL AQUI';
 
   public Boolean validarUsuario(String usuario, String senha) throws SQLException {
     try {
-      ResultSet rs = null;
-      PreparedStatement ps = null;
-
-      ps = DatabaseConnection.getInstance().getConnection().prepareStatement(SQL_VALIDAR_USUARIO);
-      ps.setString(1, usuario);
-      ps.setString(2, senha);
-      rs = ps.executeQuery();
-
-      if (rs.next()) {
-        return true;
-      }
-      return false;
+      // Implementar
     } catch (SQLException ex) {
       DatabaseConnection.rollback();
       return false;
