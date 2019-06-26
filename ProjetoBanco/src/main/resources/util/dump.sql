@@ -4,18 +4,12 @@ create table produtos (
     valor double precision not null
 );
 
-create table clientes (
-    id bigserial not null primary key,
-    nome varchar(255) not null,
-    cpf bigint,
-    dtnascimento date
-);
-
 CREATE TABLE categorias (
 	id bigserial not null primary key,
 	nome varchar(45) not null,
 	ativo boolean default true
 );
+
 ALTER TABLE produtos
 ADD column categoria_id bigint 
 
