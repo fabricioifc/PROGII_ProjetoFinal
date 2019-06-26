@@ -18,3 +18,13 @@ ALTER TABLE produtos
 ADD FOREIGN KEY (categoria_id)
 REFERENCES categorias(id);
 
+create table usuarios (
+  id bigserial not null primary key,
+  usuario varchar(255) not null,
+  senha varchar(255) not null,
+  nome varchar(255) not null,
+  status boolean default true
+);
+
+insert into usuarios (usuario, senha, nome) values 
+('admin', '21232F297A57A5A743894A0E4A801FC3', 'Admin');
