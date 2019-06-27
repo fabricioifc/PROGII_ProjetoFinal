@@ -1,7 +1,7 @@
 package br.edu.ifc.projeto.sistema.controller;
 
 import br.edu.ifc.conexao.dao.UsuarioDAO;
-import br.edu.ifc.conexao.model.Usuarios;
+import br.edu.ifc.conexao.model.Usuario;
 import br.edu.ifc.projeto.sistema.view.ProdutoGUI;
 import br.edu.ifc.projeto.sistema.view.LoginGUI;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import javax.swing.JInternalFrame;
  */
 public class UsuarioController implements UsuarioListener {
 
-  private List<Usuarios> lista = new ArrayList<>();
+  private List<Usuario> lista = new ArrayList<>();
 //  private UsuarioGUI tela;
   private UsuarioDAO dao;
 
@@ -24,14 +24,14 @@ public class UsuarioController implements UsuarioListener {
   }
 
   @Override
-  public boolean salvar(Usuarios usuario) throws Exception {
+  public boolean salvar(Usuario usuario) throws Exception {
     boolean salvou = false;
     // Se for produto novo
     if (usuario.getId() == null) {
       usuario.setId(Long.parseLong(String.valueOf(lista.size() + 1)));
-      salvou = dao.salvar(usuario);
+//      salvou = dao.salvar(usuario);
     } else {
-      salvou = dao.atualizar(usuario, usuario.getId());
+//      salvou = dao.atualizar(usuario, usuario.getId());
     }
     if (salvou) {
 //      tela.limparTela();
@@ -53,16 +53,16 @@ public class UsuarioController implements UsuarioListener {
   }
 
   @Override
-  public boolean excluir(Usuarios produto) {
+  public boolean excluir(Usuario produto) {
     try {
-      boolean excluir = dao.excluir(produto.getId());
+//      boolean excluir = dao.excluir(produto.getId());
 
-      if (excluir) {
+//      if (excluir) {
 //        tela.mostrarMensagem("Usuario Excluido com Sucesso!");
         carregar();
-      }
+//      }
 
-      return excluir;
+      return false;
     } catch (Exception ex) {
       ex.printStackTrace();
 //      tela.mostrarMensagem(ex.getMessage());

@@ -4,20 +4,19 @@ import br.edu.ifc.conexao.dao.UsuarioDAO;
 import java.security.MessageDigest;
 import javax.xml.bind.DatatypeConverter;
 
-/**
- *
- * @author fabricio
- */
 public class LoginController {
 
-  private /*Classe UsuarioDAO AQUI*/ dao ;
+  private UsuarioDAO dao;
 
   public LoginController() {
-    dao = new /*Classe UsuarioDAO AQUI*/;
+    dao = new UsuarioDAO();
+//    https://github.com/fabricioifc/PROGII_ProjetoFinal
   }
 
   public boolean validarUsuario(String usuario, String senha) throws Exception {
-    // Implementar
+    String senhaCriptografada = criptografarSenha(senha);
+    return dao.validarUsuario(usuario, senhaCriptografada);
+
   }
 
   /**
